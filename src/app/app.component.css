@@ -1,0 +1,10 @@
+.center {
+    margin: auto;
+    width: 85%;
+    max-width: 900px;
+    min-width: 250px;
+  }
+
+[mat-raised-button] {
+  width: 100%;
+}
