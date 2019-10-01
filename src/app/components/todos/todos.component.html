@@ -1,1 +1,43 @@
-<p>todos works!</p>
+<mat-progress-bar mode="indeterminate" color="warn" [style.display]="showSpinner ? 'block' : 'none'"></mat-progress-bar>
+<mat-card class="center">
+    <mat-card-header>
+        <mat-card-title>
+            <mat-icon>check_circle</mat-icon> TODOs 
+        </mat-card-title>
+    </mat-card-header>
+    <button (click)="crearTodo()" mat-fab color="primary" matTooltip="Crear Todo">
+        <mat-icon>add</mat-icon>
+    </button>
+    <mat-card-content>
+        <mat-form-field style="margin-right: 10px"> 
+            <input matInput placeholder="descripcion..." [(ngModel)]="descripcion" />
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="id..." [(ngModel)]="id" />
+        </mat-form-field>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+        <mat-list role="list" *ngFor="let todo of todos">
+            <mat-list-item>
+                <mat-icon matListAvatar>check_circle</mat-icon>
+                <h4 matLine >{{ todo.descripcion }}</h4>
+                <h5 matLine >Estado: {{ todo.estado }} </h5>
+                <button 
+                    mat-mini-fab color="primary" 
+                    matTooltip="Modificar" 
+                > 
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button 
+                    style="margin-left: 2px" 
+                    mat-mini-fab color="warn" 
+                    matTooltip="Eliminar" 
+                    (click)="eliminar(todo._id)"
+                >
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>
