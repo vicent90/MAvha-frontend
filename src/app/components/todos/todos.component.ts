@@ -4,7 +4,7 @@ import { TodoService } from '../../providers/todo.service';
 import { MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-import { ESTADOS } from '../../config/config';
+import { STATUS } from '../../config/config';
 import { CrearTodosComponent } from './crear-todos.component';
 
 @Component({
@@ -27,7 +27,7 @@ export class TodosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.estados = ESTADOS;
+    this.estados = STATUS.concat('todas');
     this.obtenerTodos();
   }
 

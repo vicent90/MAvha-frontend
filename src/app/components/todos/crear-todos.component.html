@@ -15,9 +15,12 @@
                 <mat-error>La descripcion es obligatorio</mat-error>
             </mat-form-field>
             <mat-form-field >
-                <input
-                    matInput formControlName="estado" placeholder="Estado de la tarea" 
-                    name="tarea" required>
+                <mat-label>Estado</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let estado of estados" [value]="estado">
+                    {{estado}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
             <br>
             <!-- <mat-form-field style="max-width: 377px; width: 100%">

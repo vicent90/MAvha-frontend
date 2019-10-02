@@ -3,6 +3,7 @@ import { TodoService } from 'src/app/providers/todo.service';
 import { MatDialogRef } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { STATUS } from '../../config/config';
 
 @Component({
   selector: 'app-crear-todos',
@@ -11,6 +12,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 })
 export class CrearTodosComponent implements OnInit {
 
+  estados: string[];
   forma: FormGroup;
   showSpinner = false;
 
@@ -21,6 +23,8 @@ export class CrearTodosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.estados = STATUS;
+    console.log(STATUS);
     this.forma = new FormGroup({
       descripcion: new FormControl( null, Validators.required),
       estado: new FormControl( null )
