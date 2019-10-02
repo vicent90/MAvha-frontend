@@ -2,18 +2,28 @@
 <mat-card class="center">
     <mat-card-header>
         <mat-card-title>
-            <mat-icon>check_circle</mat-icon> TODOs 
+            <h2>
+                <mat-icon>check_circle</mat-icon> Lista de tareas
+            </h2>  
         </mat-card-title>
     </mat-card-header>
-    <button (click)="crearTodo()" mat-fab color="primary" matTooltip="Crear Todo">
+    <button (click)="crearTodo()" mat-fab color="primary" matTooltip="Crear Tarea" class="btn-crear">
         <mat-icon>add</mat-icon>
     </button>
     <mat-card-content>
         <mat-form-field style="margin-right: 10px"> 
             <input matInput placeholder="descripcion..." [(ngModel)]="descripcion" />
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field style="margin-right: 10px">
             <input matInput placeholder="id..." [(ngModel)]="id" />
+        </mat-form-field> 
+        <mat-form-field>
+            <mat-label>Estado</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let estado of estados" [value]="estado">
+                {{estado}}
+              </mat-option>
+            </mat-select>
         </mat-form-field>
     </mat-card-content>
     <mat-divider></mat-divider>
