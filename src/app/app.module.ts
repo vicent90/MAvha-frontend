@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TodosComponent } from './components/todos/todos.component';
 import { CrearTodosComponent } from './components/todos/crear-todos.component';
 import { ConfirmationDialogComponent } from './components/todos/confirmation-dialog/confirmation-dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     FormsModule,
     MaterialModule,
     HttpClientModule,

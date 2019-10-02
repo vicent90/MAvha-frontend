@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ESTADOS } from '../../config/config';
+import { CrearTodosComponent } from './crear-todos.component';
 
 @Component({
   selector: 'app-todos',
@@ -36,6 +37,13 @@ export class TodosComponent implements OnInit {
         console.log(resp);
         this.todos = resp;
       });
+  }
+
+  crearTodo() {
+    const dialogCrearRef = this.dialog.open(CrearTodosComponent);
+    dialogCrearRef.afterClosed().subscribe(result => {
+      if (result) { this.obtenerTodos(); }
+    });
   }
 
   eliminar(id: number) {
