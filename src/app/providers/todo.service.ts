@@ -27,7 +27,7 @@ export class TodoService {
     const url = URL_SERVICIOS + '/todos';
     return this.http.get( url )
       .pipe( map((resp: any) => {
-        return resp;
+        return resp.tareas;
       }),
       catchError( err => {
         return throwError(err);
@@ -47,5 +47,15 @@ export class TodoService {
     );
   }
 
-
+  actualizarEstadoTodo( id: number ) {
+    const url = URL_SERVICIOS + '/todos/' + id;
+    return this.http.put( url, {estado: 'resuelta'} )
+      .pipe( map((resp: any) => {
+        return resp;
+      }),
+      catchError( err => {
+        return throwError(err);
+      })
+    );
+  }
 }

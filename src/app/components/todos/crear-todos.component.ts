@@ -39,6 +39,8 @@ export class CrearTodosComponent implements OnInit {
     if ( this.forma.status === 'INVALID' ) { return; }
     this.showSpinner = true;
     const nuevoTodo = this.forma.value;
+    if (this.forma.value.estado === null) { nuevoTodo.estado = STATUS[0]; }
+    console.log(nuevoTodo);
     this.todoService.crearTodo( nuevoTodo )
       .subscribe(
         (resp) => {

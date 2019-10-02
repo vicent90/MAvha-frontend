@@ -27,7 +27,7 @@
         </mat-form-field>
     </mat-card-content>
     <mat-divider></mat-divider>
-    <mat-card-content>
+    <mat-card-content *ngIf="todos">
         <mat-list role="list" *ngFor="let todo of todos">
             <mat-list-item>
                 <mat-icon matListAvatar>check_circle</mat-icon>
@@ -35,7 +35,8 @@
                 <h5 matLine >Estado: {{ todo.estado }} </h5>
                 <button 
                     mat-mini-fab color="primary" 
-                    matTooltip="Modificar" 
+                    matTooltip="Cambiar estado" 
+                    (click)="cambiarEstado(todo._id)"
                 > 
                     <mat-icon>edit</mat-icon>
                 </button>

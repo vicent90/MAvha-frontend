@@ -29,6 +29,7 @@ export class TodosComponent implements OnInit {
   ngOnInit() {
     this.estados = STATUS.concat('todas');
     this.obtenerTodos();
+
   }
 
   obtenerTodos = () => {
@@ -69,5 +70,22 @@ export class TodosComponent implements OnInit {
           );
       } else { this.showSpinner = false; }
     });
+  }
+
+  cambiarEstado(id: number) {
+    this.showSpinner = true;
+    this.todoService.actualizarEstadoTodo( id )
+      .subscribe(
+        (resp) => {
+          this.showSpinner = false;
+          this.notif.success(resp.message);
+          this.obtenerTodos();
+        },
+        (error) => {
+          this.showSpinner = false;
+          this.notif.error(error.error.message, error.error.errors.message);
+          console.error(error);
+        }
+      );
   }
 }
