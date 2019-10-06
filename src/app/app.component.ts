@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MAvha-frontend';
+
+  notifOptions = {
+    timeOut: 2000,
+    showProgressBar: true,
+    pauseOnHover: true,
+    clickToClose: true
+  };
 }

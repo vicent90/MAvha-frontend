@@ -15,7 +15,7 @@ export class TodoService {
     const url = URL_SERVICIOS + '/todos';
     return this.http.post( url, data )
       .pipe( map((resp: any) => {
-        return resp;
+        return resp.tarea;
       }),
       catchError( err => {
         return throwError(err);
@@ -47,9 +47,9 @@ export class TodoService {
     );
   }
 
-  actualizarEstadoTodo( id: number ) {
+  actualizarEstadoTodo( id: number, estado: string ) {
     const url = URL_SERVICIOS + '/todos/' + id;
-    return this.http.put( url, {estado: 'resuelta'} )
+    return this.http.put( url, { estado } )
       .pipe( map((resp: any) => {
         return resp;
       }),

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoModel } from '../../models/todo.model';
-import { TodoService } from '../../providers/todo.service';
 import { MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { STATUS } from '../../config/config';
 import { CrearTodosComponent } from './crear-todos.component';
+import { TodoModel } from '../../models/todo.model';
+import { TodoService } from '../../providers/todo.service';
 
 @Component({
   selector: 'app-todos',
@@ -35,8 +35,10 @@ export class TodosComponent implements OnInit {
   obtenerTodos = () => {
     this.todoService.obtenerTodos()
       .subscribe( resp => {
-        console.log(resp);
         this.todos = resp;
+      },
+      (error) => {
+        this.notif.error('Error de comunición con el servidor');
       });
   }
 
@@ -51,40 +53,40 @@ export class TodosComponent implements OnInit {
     this.showSpinner = true;
     const dialogConfRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '350px',
-      data: 'Do you confirm the deletion of this data?'
+      data: 'Esta seguro que desea borrar la tarea?'
     });
     dialogConfRef.afterClosed().subscribe(result => {
       if ( result ) {
         this.todoService.borrarTodo( id )
           .subscribe( resp => {
             this.showSpinner = false;
-            console.log(resp);
             this.obtenerTodos();
-            this.notif.success(resp.message);
+            this.notif.success(resp.mensaje);
           },
           (error) => {
             this.showSpinner = false;
-            this.notif.error(error.error.message);
-            console.error(error);
+            const mensaje = error.error.mensaje ? error.error.mensaje : 'Error conexión con el servidor';
+            this.notif.error(mensaje);
           }
           );
       } else { this.showSpinner = false; }
     });
   }
 
-  cambiarEstado(id: number) {
+  cambiarEstado(id: number, estado: string ) {
     this.showSpinner = true;
-    this.todoService.actualizarEstadoTodo( id )
+    estado === 'pendiente' ? estado = 'resuelta' : estado = 'pendiente';
+    this.todoService.actualizarEstadoTodo( id, estado )
       .subscribe(
         (resp) => {
           this.showSpinner = false;
-          this.notif.success(resp.message);
+          this.notif.success('Se cambió el estado de la tarea');
           this.obtenerTodos();
         },
         (error) => {
           this.showSpinner = false;
-          this.notif.error(error.error.message, error.error.errors.message);
-          console.error(error);
+          const mensaje = error.error.mensaje ? error.error.mensaje : 'Error conexión con el servidor';
+          this.notif.error(mensaje);
         }
       );
   }

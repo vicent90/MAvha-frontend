@@ -8,17 +8,11 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-form-field style="max-width: 377px; width: 100%">
+            <mat-form-field style="min-width: 600px; width: 100%">
                 <input 
                     matInput formControlName="descripcion" placeholder="Descripción de la tarea" 
                     name="descripcion" required >
                 <mat-error>La descripcion es obligatorio</mat-error>
-            </mat-form-field>
-            <br>
-            <mat-form-field style="max-width: 377px; width: 100%">
-                <input 
-                    matInput  placeholder="Nombre del archivo"
-                >
             </mat-form-field>
             <br>
             <mat-form-field >
@@ -29,12 +23,10 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <br>
-            <!-- <mat-form-field style="max-width: 377px; width: 100%">
-                nombre del archivo a cargar.png
-            </mat-form-field> -->
+            <br><br>
+            <input type="file" (change)="seleccionarArchivo($event)" formControlName="archivo" name="archivo" required/>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions> 
             <button mat-button  color="primary" type="submit">
                 <mat-icon>archive</mat-icon>
                 Guardar
