@@ -16,7 +16,7 @@ const app = express();
 // app.use(forceSSL());
 // Run the app by serving the static files
 // in the dist directory
-app.use(express.static(__dirname + '/dist/mavha-frontend'));
+app.use(express.static(__dirname + '/dist/MAvha-frontend'));
 // Start the app by listening on the default
 // Heroku port
 app.listen(process.env.PORT || 5000, function(){
