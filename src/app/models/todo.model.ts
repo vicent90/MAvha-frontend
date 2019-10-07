@@ -1,6 +1,6 @@
 export class TodoModel {
     public descripcion: string;
     public estado: string;
-    public documento: any;
+    public archivo: any;
     public nombreArchivo: string;
 }

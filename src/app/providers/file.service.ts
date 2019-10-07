@@ -11,7 +11,7 @@ export class FileService {
 
   constructor( public http: HttpClient ) { }
 
-  subirArchivo(id: number, archivo: File, nombreArchivo: string) {
+  subirArchivo(id: number, archivo: File) {
     const url = URL_SERVICIOS + '/uploads/' + id;
     const formData: FormData = new FormData();
     formData.append('archivo', archivo);
@@ -28,12 +28,24 @@ export class FileService {
   descargarArchivo( nombreArchivo: string ) {
     const url = URL_SERVICIOS + '/uploads/' + nombreArchivo;
     return this.http.get(url, {responseType: 'arraybuffer'} )
-    .pipe( map((resp: any) => {
-      return resp;
-    }),
-    catchError( err => {
-      return throwError(err);
-    })
-  );
+      .pipe( map((resp: any) => {
+        return resp;
+      }),
+      catchError( err => {
+        return throwError(err);
+      })
+    );
+  }
+
+  borrarArchivo( nombreArchivo: string ) {
+    const url = URL_SERVICIOS + '/uploads/' + nombreArchivo;
+    return this.http.delete(url)
+      .pipe( map((resp: any) => {
+        return resp;
+      }),
+      catchError( err => {
+        return throwError(err);
+      })
+    );
   }
 }

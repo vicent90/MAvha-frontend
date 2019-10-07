@@ -41,7 +41,8 @@ export class TodosComponent implements OnInit {
         this.todos = resp;
       },
       (error) => {
-        this.notif.error('Error de comunición con el servidor');
+        const mensaje = error.error.mensaje ? error.error.mensaje : 'Error conexión con el servidor';
+        this.notif.error(mensaje);
       });
   }
 
@@ -52,7 +53,7 @@ export class TodosComponent implements OnInit {
     });
   }
 
-  eliminar(id: number) {
+  eliminar(id: number, archivo: string) {
     this.showSpinner = true;
     const dialogConfRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '350px',
@@ -62,9 +63,18 @@ export class TodosComponent implements OnInit {
       if ( result ) {
         this.todoService.borrarTodo( id )
           .subscribe( resp => {
-            this.showSpinner = false;
-            this.obtenerTodos();
-            this.notif.success(resp.mensaje);
+            this.fileService.borrarArchivo(archivo).subscribe(
+              (res) => {
+                this.showSpinner = false;
+                this.obtenerTodos();
+                this.notif.success(resp.mensaje);
+              },
+              (err) => {
+                this.showSpinner = false;
+                const mensaje = err.error.mensaje ? err.error.mensaje : 'Error conexión con el servidor';
+                this.notif.error(mensaje);
+              }
+            );
           },
           (error) => {
             this.showSpinner = false;
