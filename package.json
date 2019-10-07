@@ -1,6 +1,8 @@
 {
   "name": "mavha-frontend",
   "version": "0.0.0",
+  "license": "MIT",
+  "angular-cli": {},
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
