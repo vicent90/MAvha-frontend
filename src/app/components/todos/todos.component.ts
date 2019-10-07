@@ -32,7 +32,6 @@ export class TodosComponent implements OnInit {
   ngOnInit() {
     this.estados = STATUS.concat('todas');
     this.obtenerTodos();
-
   }
 
   obtenerTodos = () => {

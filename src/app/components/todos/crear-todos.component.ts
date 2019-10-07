@@ -59,7 +59,7 @@ export class CrearTodosComponent implements OnInit {
     this.todoService.crearTodo( nuevoTodo )
       .subscribe(
         (resp) => {
-          this.fileService.subirArchivo( resp._id, this.archivoSubir, this.archivoSubir.name)
+          this.fileService.subirArchivo( resp._id, this.archivoSubir )
             .subscribe(
               (res) => {
                 this.showSpinner = false;
