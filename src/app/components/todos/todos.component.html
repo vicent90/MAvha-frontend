@@ -33,7 +33,11 @@
                 <mat-icon matListAvatar>check_circle</mat-icon>
                 <h4 matLine >{{ todo.descripcion }}</h4>
                 <h5 matLine >Estado: {{ todo.estado }} </h5>
+                <h5 class="pointer" (click)="descargarArchivo(todo.archivo, todo.nombreArchivo)">
+                    {{ todo.nombreArchivo }}
+                </h5>
                 <button 
+                    style="margin-left: 20px"
                     mat-mini-fab color="primary" 
                     matTooltip="Cambiar estado" 
                     (click)="cambiarEstado(todo._id, todo.estado)"

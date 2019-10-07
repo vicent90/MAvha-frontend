@@ -24,4 +24,16 @@ export class FileService {
       })
     );
   }
+
+  descargarArchivo( nombreArchivo: string ) {
+    const url = URL_SERVICIOS + '/uploads/' + nombreArchivo;
+    return this.http.get(url, {responseType: 'arraybuffer'} )
+    .pipe( map((resp: any) => {
+      return resp;
+    }),
+    catchError( err => {
+      return throwError(err);
+    })
+  );
+  }
 }

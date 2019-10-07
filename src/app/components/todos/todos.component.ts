@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { NotificationsService } from 'angular2-notifications';
+import { saveAs } from 'file-saver';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { STATUS } from '../../config/config';
 import { CrearTodosComponent } from './crear-todos.component';
 import { TodoModel } from '../../models/todo.model';
 import { TodoService } from '../../providers/todo.service';
+import { FileService } from '../../providers/file.service';
 
 @Component({
   selector: 'app-todos',
@@ -22,6 +24,7 @@ export class TodosComponent implements OnInit {
 
   constructor(
     public todoService: TodoService,
+    public fileService: FileService,
     public dialog: MatDialog,
     public notif: NotificationsService
   ) { }
@@ -82,6 +85,25 @@ export class TodosComponent implements OnInit {
           this.showSpinner = false;
           this.notif.success('Se cambió el estado de la tarea');
           this.obtenerTodos();
+        },
+        (error) => {
+          this.showSpinner = false;
+          const mensaje = error.error.mensaje ? error.error.mensaje : 'Error conexión con el servidor';
+          this.notif.error(mensaje);
+        }
+      );
+  }
+
+  descargarArchivo(archivo: string, nombreArchivo: string) {
+    this.showSpinner = true;
+    this.fileService.descargarArchivo(archivo)
+      .subscribe(
+        (resp) => {
+          this.showSpinner = false;
+          const blob = new Blob([resp]);
+          const url = window.URL.createObjectURL(blob);
+          saveAs(blob, nombreArchivo);
+          // window.open(url);
         },
         (error) => {
           this.showSpinner = false;
