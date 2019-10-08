@@ -25,11 +25,10 @@ export class TodoService {
 
   obtenerTodos(id: string, descripcion: string, estado: string) {
     let url = URL_SERVICIOS + '/todos' + '?';
-    console.log(id, descripcion, estado);
     url += id ? `&_id=${ id }` : '';
     url += descripcion === '' ? '' : `&descripcion=${ descripcion }`;
     url += ( estado === undefined || estado === 'todas' ) ? '' : `&estado=${ estado }`;
-    console.log(url);
+    // console.log(url);
     return this.http.get( url )
       .pipe( map((resp: any) => {
         return resp.tareas;

@@ -36,7 +36,6 @@ export class TodosComponent implements OnInit {
   }
 
   obtenerTodos() {
-    console.log(this.id, this.descripcion, this.estados);
     this.todoService.obtenerTodos(this.id, this.descripcion, this.estado)
       .subscribe( resp => {
         this.todos = resp;
@@ -50,7 +49,7 @@ export class TodosComponent implements OnInit {
   crearTodo() {
     const dialogCrearRef = this.dialog.open(CrearTodosComponent);
     dialogCrearRef.afterClosed().subscribe(result => {
-      if (result) { this.obtenerTodos(); }
+      if (result) { this.limpiarBusqueda(); }
     });
   }
 
@@ -67,7 +66,7 @@ export class TodosComponent implements OnInit {
             this.fileService.borrarArchivo(archivo).subscribe(
               (res) => {
                 this.showSpinner = false;
-                this.obtenerTodos();
+                this.limpiarBusqueda();
                 this.notif.success(resp.mensaje);
               },
               (err) => {

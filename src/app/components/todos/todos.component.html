@@ -3,7 +3,7 @@
     <mat-card-header>
         <mat-card-title>
             <h2>
-                <mat-icon>check_circle</mat-icon> Lista de tareas
+                <mat-icon>list</mat-icon> Lista de tareas
             </h2>  
         </mat-card-title>
     </mat-card-header>
@@ -14,9 +14,9 @@
         <mat-form-field style="margin-right: 10px"> 
             <input matInput placeholder="descripcion..." [(ngModel)]="descripcion" />
         </mat-form-field>
-        <mat-form-field style="margin-right: 10px">
+        <!-- <mat-form-field style="margin-right: 10px">
             <input matInput placeholder="id..." [(ngModel)]="id" />
-        </mat-form-field> 
+        </mat-form-field>  -->
         <mat-form-field>
             <mat-label>Estado</mat-label>
             <mat-select [(ngModel)]="estado">
@@ -46,7 +46,8 @@
     <mat-card-content *ngIf="todos">
         <mat-list role="list" *ngFor="let todo of todos">
             <mat-list-item>
-                <mat-icon matListAvatar>check_circle</mat-icon>
+                <mat-icon matListAvatar *ngIf="todo.estado === 'resuelta'">check_box</mat-icon>
+                <mat-icon matListAvatar *ngIf="todo.estado === 'pendiente'">check_box_outline_blank</mat-icon>
                 <h4 matLine >{{ todo.descripcion }}</h4>
                 <h5 matLine >Estado: {{ todo.estado }} </h5>
                 <h5 class="pointer" (click)="descargarArchivo(todo.archivo, todo.nombreArchivo)">
