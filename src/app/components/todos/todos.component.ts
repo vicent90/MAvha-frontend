@@ -71,8 +71,10 @@ export class TodosComponent implements OnInit {
               },
               (err) => {
                 this.showSpinner = false;
-                const mensaje = err.error.mensaje ? err.error.mensaje : 'Error conexión con el servidor';
-                this.notif.error(mensaje);
+                this.limpiarBusqueda();
+                this.notif.success(resp.mensaje);
+                // const mensaje = err.error.mensaje ? err.error.mensaje : 'Error conexión con el servidor';
+                // this.notif.error(mensaje);
               }
             );
           },
