@@ -19,12 +19,28 @@
         </mat-form-field> 
         <mat-form-field>
             <mat-label>Estado</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let estado of estados" [value]="estado">
+            <mat-select [(ngModel)]="estado">
+              <mat-option *ngFor="let estado of estados" [value]="estado" >
                 {{estado}}
               </mat-option>
             </mat-select>
         </mat-form-field>
+        <button 
+            style="margin-left: 10px" 
+            mat-mini-fab 
+            matTooltip="Buscar tarea" 
+            (click)="obtenerTodos()"
+        >
+            <mat-icon>search</mat-icon>
+        </button>
+        <button 
+            style="margin-left: 2px" 
+            mat-mini-fab color="primary"
+            matTooltip="Limpiar busqueda" 
+            (click)="limpiarBusqueda()"
+        >
+            <mat-icon>refresh</mat-icon>
+        </button>
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-content *ngIf="todos">

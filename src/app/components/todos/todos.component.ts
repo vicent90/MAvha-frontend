@@ -18,9 +18,10 @@ export class TodosComponent implements OnInit {
 
   showSpinner = false;
   descripcion = '';
-  id = null;
+  id = '';
   todos: TodoModel[];
-  estados: string[];
+  estados: string[] = STATUS;
+  estado: string;
 
   constructor(
     public todoService: TodoService,
@@ -34,8 +35,9 @@ export class TodosComponent implements OnInit {
     this.obtenerTodos();
   }
 
-  obtenerTodos = () => {
-    this.todoService.obtenerTodos()
+  obtenerTodos() {
+    console.log(this.id, this.descripcion, this.estados);
+    this.todoService.obtenerTodos(this.id, this.descripcion, this.estado)
       .subscribe( resp => {
         this.todos = resp;
       },
@@ -120,5 +122,12 @@ export class TodosComponent implements OnInit {
           this.notif.error(mensaje);
         }
       );
+  }
+
+  limpiarBusqueda() {
+    this.descripcion = '';
+    this.id = null;
+    this.estado = 'todas';
+    this.obtenerTodos();
   }
 }
